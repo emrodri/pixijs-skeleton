@@ -8,15 +8,22 @@ module.exports = {
     port: 3000,
   },
   devtool: 'inline-source-map',
-  plugins: [ 
+  plugins: [
     new CopyWebpackPlugin({
-        patterns: [
-          { from: 'build/assets', to: 'assets' }
-        ],
-      }),
+      patterns: [{ from: 'build/assets', to: 'assets' }],
+    }),
     new HTMLWebpackPlugin({
       template: 'build/index.html',
       filename: 'index.html',
     }),
   ],
+  module: {
+    rules: [
+      {
+        test: /\.js$/,
+        loader: 'babel-loader',
+        exclude: /(node_modules)/,
+      },
+    ],
+  },
 };
